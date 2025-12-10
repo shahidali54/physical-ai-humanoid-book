@@ -1,0 +1,57 @@
+# Isaac Sim Sensor Configuration
+# Configuration for sensors in Isaac Sim scenes
+
+sensors:
+  # RGB Camera Configuration
+  - name: "rgb_camera"
+    type: "rgb"
+    position: [0.0, 0.0, 0.0]
+    rotation: [0.0, 0.0, 0.0]
+    resolution: [1920, 1080]
+    fov: 90.0
+    clipping_range: [0.1, 100.0]
+
+  # Depth Camera Configuration
+  - name: "depth_camera"
+    type: "depth"
+    position: [0.0, 0.0, 0.0]
+    rotation: [0.0, 0.0, 0.0]
+    resolution: [640, 480]
+    fov: 90.0
+    clipping_range: [0.1, 10.0]
+
+  # LiDAR Configuration
+  - name: "lidar"
+    type: "lidar"
+    position: [0.0, 0.0, 1.0]
+    rotation: [0.0, 0.0, 0.0]
+    horizontal_resolution: 64
+    vertical_resolution: 1
+    horizontal_fov: 360.0
+    vertical_fov: 20.0
+    min_range: 0.1
+    max_range: 25.0
+
+  # IMU Configuration
+  - name: "imu"
+    type: "imu"
+    position: [0.0, 0.0, 0.5]
+    rotation: [0.0, 0.0, 0.0]
+    noise_density: 0.01
+    random_walk: 0.001
+
+# Synthetic Data Generation Settings
+synthetic_data:
+  depth:
+    enabled: true
+    format: "png"
+  segmentation:
+    enabled: true
+    format: "png"
+    class_mapping: "default"
+  bounding_boxes:
+    enabled: true
+    format: "json"
+  normals:
+    enabled: true
+    format: "png"
