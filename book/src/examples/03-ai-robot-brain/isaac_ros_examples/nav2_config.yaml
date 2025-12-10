@@ -1,0 +1,77 @@
+# Isaac ROS to Nav2 Integration Configuration
+# Configuration for integrating Isaac ROS VSLAM with Nav2 navigation
+
+# This configuration demonstrates how Isaac ROS outputs can be used as inputs to Nav2
+# for navigation tasks, particularly for humanoid robots
+
+isaac_ros_vslam:
+  ros__parameters:
+    # Input topics from Isaac ROS
+    input_image_topic: "/camera/color/image_raw"
+    input_camera_info_topic: "/camera/color/camera_info"
+    input_imu_topic: "/imu/data"
+
+    # Output topics for Nav2
+    output_pose_topic: "/visual_slam/pose"
+    output_odometry_topic: "/visual_slam/odometry"
+    output_map_topic: "/visual_slam/map"
+
+    # Processing parameters
+    use_gpu: true
+    gpu_id: 0
+    image_width: 1920
+    image_height: 1080
+    fps: 30
+
+    # Feature detection
+    max_features: 1000
+    feature_threshold: 20
+
+    # Tracking parameters
+    tracking_window_size: [21, 21]
+    max_level_pyramid: 3
+    max_iterations: 30
+    epsilon: 0.01
+
+    # Mapping parameters
+    map_resolution: 0.05  # meters per pixel
+    map_width: 20.0       # meters
+    map_height: 20.0      # meters
+    map_origin_x: 0.0
+    map_origin_y: 0.0
+
+    # Loop closure detection
+    enable_loop_closure: true
+    loop_closure_threshold: 0.8
+    min_loop_closure_inliers: 10
+
+    # Sensor fusion
+    enable_imu_fusion: true
+    imu_weight: 0.3
+    visual_weight: 0.7
+
+# Map to Occupancy Grid Converter Node
+map_converter:
+  ros__parameters:
+    input_map_topic: "/visual_slam/map"
+    output_occupancy_grid_topic: "/map"
+    resolution: 0.05
+    negate: 0
+    occupancy_threshold: 25
+    probability_topic_name: "prob"
+    map_subscribe_transient_local: true
+
+# TF configuration for coordinate frames
+tf:
+  ros__parameters:
+    use_sim_time: true
+    # Static transforms for Isaac Sim to ROS coordinate frames
+    static_transforms:
+      - parent_frame: "odom"
+        child_frame: "base_footprint"
+        translation: [0.0, 0.0, 0.0]
+        rotation: [0.0, 0.0, 0.0, 1.0]  # [x, y, z, w] quaternion
+      - parent_frame: "base_footprint"
+        child_frame: "camera"
+        translation: [0.2, 0.0, 0.8]  # Camera mounted 0.2m forward, 0.8m high
+        rotation: [0.0, 0.0, 0.0, 1.0]
