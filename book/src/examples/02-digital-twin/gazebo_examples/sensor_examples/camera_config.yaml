@@ -1,0 +1,24 @@
+# Camera Sensor Configuration for Digital Twin Examples
+sensor_type: "camera"
+sensor_name: "front_camera"
+topic_name: "/camera/image_raw"
+update_rate: 30.0  # Hz
+
+camera:
+  horizontal_fov: 1.047  # 60 degrees in radians
+  image:
+    width: 640
+    height: 480
+    format: "R8G8B8"
+  clip:
+    near: 0.1
+    far: 10.0
+
+noise:
+  type: "gaussian"
+  mean: 0.0
+  stddev: 0.007
+
+# Mounting position on robot
+position: [0.1, 0.0, 0.5]  # x, y, z relative to robot base
+rotation: [0.0, 0.0, 0.0]  # roll, pitch, yaw
