@@ -1,0 +1,8 @@
+{
+  "label": "Module 3: The AI-Robot Brain (NVIDIA Isaac™)",
+  "position": 3,
+  "link": {
+    "type": "generated-index",
+    "description": "Learn about NVIDIA Isaac tools for robot perception, SLAM, mapping, and navigation. This module covers Isaac Sim for photorealistic simulation and synthetic data generation, Isaac ROS for GPU-accelerated VSLAM and navigation, and Nav2 for humanoid path-planning. Students will understand the complete pipeline from perception to mapping to planning."
+  }
+}
