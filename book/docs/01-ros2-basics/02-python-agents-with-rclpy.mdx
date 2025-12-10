@@ -1,0 +1,106 @@
+---
+sidebar_position: 2
+title: 'Python Agents with rclpy'
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+import SimplePublisher from '!!raw-loader!@site/src/examples/01-ros2-basics/ros2_basics/simple_publisher.py';
+import SimpleSubscriber from '!!raw-loader!@site/src/examples/01-ros2-basics/ros2_basics/simple_subscriber.py';
+import SimpleServiceServer from '!!raw-loader!@site/src/examples/01-ros2-basics/ros2_basics/simple_service_server.py';
+
+# Python Agents with rclpy
+
+In the last chapter, you learned about the core concepts of ROS 2. Now, let's put that theory into practice. We'll write and run our own ROS 2 nodes in Python using the `rclpy` library.
+
+An "Agent" in this context is simply a Python script that acts as a ROS 2 node to perform a task. It's the "brain" that senses the world and decides how to act.
+
+## Setting Up a ROS 2 Package
+
+To keep our code organized and make it easy for ROS 2 to find, we'll create a ROS 2 package. In the setup phase, we already created the following structure:
+
+```text
+book/src/examples/01-ros2-basics/
+├── package.xml
+├── setup.py
+└── ros2_basics/
+    ├── __init__.py
+    ├── simple_publisher.py
+    ├── simple_subscriber.py
+    └── simple_service_server.py
+```
+
+The `package.xml` file describes the package, and the `setup.py` file tells ROS 2 how to build and install it.
+
+## The Publisher Node
+
+Let's start with a node that publishes a "Hello World" message every second. This is the code for `simple_publisher.py`:
+
+<CodeBlock language="python" title="ros2_basics/simple_publisher.py">{SimplePublisher}</CodeBlock>
+
+### How to Run It
+
+To run this node, you first need to build your package and source the workspace.
+
+1.  **Build the package**:
+    Open a terminal, navigate to your `book` directory, and run:
+    ```bash
+    colcon build --packages-select ros2_basics
+    ```
+
+2.  **Source the workspace**:
+    ```bash
+    source install/setup.bash
+    ```
+
+3.  **Run the node**:
+    ```bash
+    ros2 run ros2_basics simple_publisher
+    ```
+    You should see the "Publishing: ..." log messages in your terminal.
+
+## The Subscriber Node
+
+Now, let's create a node to listen to the messages from our publisher. This is the code for `simple_subscriber.py`:
+
+<CodeBlock language="python" title="ros2_basics/simple_subscriber.py">{SimpleSubscriber}</CodeBlock>
+
+### How to Run It
+
+Open a **second terminal**. Make sure to source your workspace again in this new terminal.
+
+1.  **Source the workspace**:
+    ```bash
+    cd book
+    source install/setup.bash
+    ```
+
+2.  **Run the node**:
+    ```bash
+    ros2 run ros2_basics simple_subscriber
+    ```
+    If your publisher node is running, you will see the "I heard: ..." log messages in this terminal.
+
+## The Service Server Node
+
+Finally, let's create a service that adds two integers.
+
+<CodeBlock language="python" title="ros2_basics/simple_service_server.py">{SimpleServiceServer}</CodeBlock>
+
+### How to Run and Test It
+
+1.  Run the service node in a new terminal (remember to build and source):
+    ```bash
+    ros2 run ros2_basics simple_service_server
+    ```
+
+2.  In another terminal, you can call the service from the command line:
+    ```bash
+    ros2 service call /add_two_ints example_interfaces/srv/AddTwoInts "{a: 5, b: 10}"
+    ```
+    The service server terminal will log the request, and the client terminal will show the result `sum: 15`.
+
+## What's Next?
+
+You have now successfully created, built, and run your own ROS 2 nodes for topics and services. In the next chapter, we'll take a step closer to a real robot by introducing URDF, the file format used to describe a robot's physical structure.
