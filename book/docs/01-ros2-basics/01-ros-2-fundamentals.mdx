@@ -1,0 +1,72 @@
+---
+sidebar_position: 1
+title: 'ROS 2 Fundamentals'
+---
+
+# Module 1: The Robotic Nervous System (ROS 2)
+
+Welcome to the first module in our journey to understanding humanoid robotics. Before we can make a robot walk or talk, we need to understand its nervous system. In modern robotics, that nervous system is often the **Robot Operating System (ROS)**. We'll be using the latest version, ROS 2.
+
+This chapter introduces the three most important concepts in ROS 2:
+- **Nodes**: The individual processes that perform computation.
+- **Topics**: The buses that nodes use to exchange messages.
+- **Services**: A way for nodes to request and receive information directly from other nodes.
+
+## The ROS 2 Architecture: A Symphony of Nodes
+
+Imagine a symphony orchestra. Each musician is an expert at their instrument, playing their part. The conductor coordinates them, and the sheet music tells them what to play. Together, they create a complex piece of music.
+
+A ROS 2 system is very similar. It's a collection of small, independent programs called **Nodes**. Each node is responsible for one specific task.
+
+- A node for a camera might capture images.
+- A node for a laser scanner might measure distances.
+- A node for a wheel motor might control its speed.
+- A node for planning might decide where the robot should go.
+
+This modular approach is powerful. You can build complex systems by combining many simple, reusable nodes.
+
+## Nodes: The Brains of the Operation
+
+A **Node** is just an executable program running in your ROS 2 system. In this book, we'll be writing our nodes in Python using the `rclpy` (ROS Client Library for Python).
+
+A node can:
+- **Publish** messages on a topic.
+- **Subscribe** to messages on a topic.
+- Provide a **Service**.
+- Be a client of a **Service**.
+
+## Topics: The Public Announcement System
+
+So how do nodes talk to each other? They use **Topics**.
+
+A **Topic** is like a public announcement channel or a named bus. Nodes can publish (send) messages to a topic, and other nodes can subscribe to (receive) messages from that same topic.
+
+- **One-to-Many**: A single topic can have many publishers and many subscribers. This is great for broadcasting data, like a camera feed that multiple processing nodes might want to see.
+- **Decoupled**: The publishing node doesn't know or care which nodes are subscribing. It just sends the message. The subscribing nodes don't know who published the message. This makes the system very flexible. You can add or remove nodes without affecting the others.
+- **Typed Messages**: Every topic has a specific message type. For example, a camera topic might use a `sensor_msgs/Image` type, while a motor command topic might use a `geometry_msgs/Twist` type. This ensures that all nodes on a topic are speaking the same language.
+
+Here is a diagram showing how this works:
+
+![ROS 2 Architecture Diagram](/img/ros2_architecture.svg)
+
+This diagram shows a common scenario:
+- **Node 1** is a publisher (e.g., a camera driver).
+- It publishes messages to the `/camera/image` **Topic**.
+- **Node 2** is a subscriber (e.g., an image processing node). It receives and processes the images from the topic.
+
+## Services: The Direct Line
+
+Topics are great for continuous streams of data, but what if one node needs to ask another node a specific question and get a direct answer? For this, we use **Services**.
+
+A service is a **request/reply** communication pattern. It has two parts:
+1.  **A Service Server**: A node that provides the service. It waits for a request, does some work, and then sends back a response.
+2.  **A Service Client**: A node that calls the service. It sends a request and waits for the response.
+
+Unlike topics, services are a one-to-one communication. When a client calls a service, it expects a response directly from the server. This is useful for things like:
+- Triggering an action (e.g., "capture a high-resolution image now").
+- Getting a piece of data (e.g., "what is the robot's current position?").
+- Configuring a node (e.g., "change the camera's exposure setting").
+
+## What's Next?
+
+Now that you understand the fundamental concepts of Nodes, Topics, and Services, the next chapter will show you how to bring them to life. We will write our own simple publisher, subscriber, and service nodes in Python.
