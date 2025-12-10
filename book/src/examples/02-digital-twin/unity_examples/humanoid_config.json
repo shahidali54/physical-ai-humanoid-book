@@ -1,0 +1,17 @@
+{
+  "name": "simple_humanoid",
+  "description": "Basic humanoid configuration for Unity examples",
+  "model_path": "Assets/Models/Humanoid.fbx",
+  "avatar_path": "Assets/Animations/HumanoidAvatar.asset",
+  "animation_controller": "Assets/Animations/HumanoidController.controller",
+  "materials": [
+    {
+      "name": "skin",
+      "color": [0.9, 0.8, 0.7, 1.0]
+    },
+    {
+      "name": "eyes",
+      "color": [0.1, 0.1, 0.8, 1.0]
+    }
+  ]
+}
