@@ -1,0 +1,85 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 24px sans-serif; fill: #2c3e50; }
+    .subtitle { font: 18px sans-serif; fill: #34495e; }
+    .gazebo { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+    .unity { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+    .comparison { fill: #9b59b6; stroke: #8e44ad; stroke-width: 2; }
+    .label { font: 16px sans-serif; fill: #2c3e50; font-weight: bold; }
+    .feature-label { font: 14px sans-serif; fill: #7f8c8d; }
+  </style>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" class="title">Gazebo vs Unity: Digital Twin Components</text>
+
+  <!-- Gazebo Column -->
+  <g transform="translate(150, 100)">
+    <rect x="-100" y="0" width="200" height="350" rx="10" ry="10" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2"/>
+    <text x="0" y="30" text-anchor="middle" class="label">Gazebo</text>
+    <text x="0" y="50" text-anchor="middle" font-size="14" fill="#34495e">Physics Simulation</text>
+
+    <!-- Physics Engine -->
+    <rect x="-80" y="70" width="160" height="60" class="gazebo" rx="5" ry="5"/>
+    <text x="0" y="105" text-anchor="middle" fill="white" font-weight="bold">Physics Engine</text>
+
+    <!-- Collision Detection -->
+    <rect x="-80" y="150" width="160" height="60" class="gazebo" rx="5" ry="5"/>
+    <text x="0" y="185" text-anchor="middle" fill="white" font-weight="bold">Collision Detection</text>
+
+    <!-- Sensor Simulation -->
+    <rect x="-80" y="230" width="160" height="60" class="gazebo" rx="5" ry="5"/>
+    <text x="0" y="265" text-anchor="middle" fill="white" font-weight="bold">Sensor Simulation</text>
+
+    <text x="0" y="320" text-anchor="middle" class="feature-label">Accurate Physics</text>
+  </g>
+
+  <!-- Unity Column -->
+  <g transform="translate(550, 100)">
+    <rect x="-100" y="0" width="200" height="350" rx="10" ry="10" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="2"/>
+    <text x="0" y="30" text-anchor="middle" class="label">Unity</text>
+    <text x="0" y="50" text-anchor="middle" font-size="14" fill="#34495e">Visualization</text>
+
+    <!-- 3D Rendering -->
+    <rect x="-80" y="70" width="160" height="60" class="unity" rx="5" ry="5"/>
+    <text x="0" y="105" text-anchor="middle" fill="white" font-weight="bold">3D Rendering</text>
+
+    <!-- Humanoid Animation -->
+    <rect x="-80" y="150" width="160" height="60" class="unity" rx="5" ry="5"/>
+    <text x="0" y="185" text-anchor="middle" fill="white" font-weight="bold">Humanoid Animation</text>
+
+    <!-- Interactive UI -->
+    <rect x="-80" y="230" width="160" height="60" class="unity" rx="5" ry="5"/>
+    <text x="0" y="265" text-anchor="middle" fill="white" font-weight="bold">Interactive UI</text>
+
+    <text x="0" y="320" text-anchor="middle" class="feature-label">High-Fidelity Visuals</text>
+  </g>
+
+  <!-- Connection between Gazebo and Unity -->
+  <g transform="translate(375, 200)">
+    <circle cx="0" cy="0" r="30" class="comparison"/>
+    <text x="0" y="5" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Digital</text>
+    <text x="0" y="20" text-anchor="middle" fill="white" font-weight="bold" font-size="12">Twin</text>
+  </g>
+
+  <!-- Arrows showing integration -->
+  <line x1="250" y1="200" x2="345" y2="200" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <line x1="455" y1="200" x2="550" y2="200" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowhead)"/>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+    </marker>
+  </defs>
+
+  <!-- Legend -->
+  <rect x="60" y="420" width="680" height="40" fill="#ffffff" stroke="#bdc3c7" stroke-width="1"/>
+  <rect x="70" y="435" width="15" height="15" class="gazebo"/>
+  <text x="95" y="447" class="label" font-size="12">Gazebo</text>
+  <rect x="180" y="435" width="15" height="15" class="unity"/>
+  <text x="205" y="447" class="label" font-size="12">Unity</text>
+  <circle cx="280" cy="442" r="7" class="comparison"/>
+  <text x="295" y="447" class="label" font-size="12">Digital Twin</text>
+  <line x1="390" y1="442" x2="410" y2="442" stroke="#e74c3c" stroke-width="3" marker-end="url(#arrowhead)"/>
+  <text x="420" y="447" class="label" font-size="12">Integration</text>
+</svg>
