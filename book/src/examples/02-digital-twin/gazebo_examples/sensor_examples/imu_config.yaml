@@ -1,0 +1,22 @@
+# IMU Sensor Configuration for Digital Twin Examples
+sensor_type: "imu"
+sensor_name: "imu_link"
+topic_name: "/imu/data"
+update_rate: 100.0  # Hz
+
+imu:
+  noise:
+    acceleration:
+      noise_density: 0.017
+      random_walk: 0.00017
+      bias_correlation_time: 600.0
+      turn_on_bias: 0.05
+    gyroscope:
+      noise_density: 0.001
+      random_walk: 0.00001
+      bias_correlation_time: 600.0
+      turn_on_bias: 0.005
+
+# Mounting position on robot
+position: [0.0, 0.0, 0.4]  # x, y, z relative to robot base
+rotation: [0.0, 0.0, 0.0]  # roll, pitch, yaw
