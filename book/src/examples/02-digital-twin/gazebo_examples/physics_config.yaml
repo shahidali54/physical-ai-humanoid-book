@@ -1,0 +1,27 @@
+# Physics Configuration for Gazebo Digital Twin Examples
+# This file contains parameters for physics simulation
+
+simulation_parameters:
+  gravity: [0, 0, -9.81]  # Standard Earth gravity (m/s^2)
+  solver:
+    type: "ode"           # Physics engine type
+    iters: 20             # Number of solver iterations
+    sor: 1.3              # Successive over-relaxation parameter
+  constraints:
+    cfm: 0.000001         # Constraint force mixing
+    erp: 0.2              # Error reduction parameter
+
+robot_parameters:
+  base_link:
+    mass: 1.0             # Mass in kg
+    friction:
+      mu: 1.0             # Friction coefficient
+      mu2: 1.0            # Secondary friction coefficient
+    restitution: 0.1      # Bounce coefficient (0 = no bounce, 1 = perfect bounce)
+
+  joints:
+    torso_to_upper_arm:
+      damping: 0.1        # Joint damping coefficient
+      friction: 0.0       # Joint friction coefficient
+      effort_limit: 100   # Maximum joint effort (N or Nm)
+      velocity_limit: 1.0 # Maximum joint velocity (rad/s or m/s)
