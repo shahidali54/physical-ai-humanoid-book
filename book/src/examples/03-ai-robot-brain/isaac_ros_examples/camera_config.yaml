@@ -1,0 +1,39 @@
+# Isaac ROS Camera Configuration
+# Configuration for Isaac ROS camera processing pipeline
+
+camera:
+  # Input topics
+  image_topic: "/camera/color/image_raw"
+  camera_info_topic: "/camera/color/camera_info"
+
+  # Processing parameters
+  image_width: 1920
+  image_height: 1080
+  fps: 30
+
+  # GPU settings
+  use_cuda: true
+  cuda_device_id: 0
+
+  # Processing pipeline
+  enable_rectification: true
+  enable_stereo: false
+  enable_depth: false
+
+  # Output topics
+  processed_image_topic: "/isaac_ros/processed/image"
+  feature_topic: "/isaac_ros/features"
+
+  # Feature extraction
+  feature_detector:
+    type: "cuda_fast"
+    threshold: 20
+    max_features: 1000
+    min_distance: 10
+
+  # Tracking parameters
+  tracking:
+    window_size: [21, 21]
+    max_level: 3
+    max_iterations: 30
+    epsilon: 0.01
