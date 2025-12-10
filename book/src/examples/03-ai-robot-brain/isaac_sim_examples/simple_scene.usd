@@ -1,0 +1,109 @@
+# Isaac Sim Simple Scene
+# USD file for a basic Isaac Sim scene with a robot and environment
+
+def Xform "World"
+{
+    def Xform "Robot"
+    {
+        # Robot model would be imported here
+        # For now, using a simple representation
+        def Xform "Chassis"
+        {
+            def Cube "Body"
+            {
+                prepend references = @./assets/robot_chassis.usda@
+            }
+        }
+    }
+
+    def Xform "Environment"
+    {
+        def Xform "GroundPlane"
+        {
+            def Plane "Plane"
+            {
+                prepend references = @./assets/plane.usda@
+            }
+        }
+
+        def Xform "Walls"
+        {
+            def Cube "Wall1"
+            {
+                add xformOp:translate = [0, 0, 2.5]
+                add xformOp:scale = [10, 0.1, 5]
+            }
+            def Cube "Wall2"
+            {
+                add xformOp:translate = [5, 0, 0]
+                add xformOp:rotateY = 90
+                add xformOp:scale = [10, 0.1, 5]
+            }
+            def Cube "Wall3"
+            {
+                add xformOp:translate = [-5, 0, 0]
+                add xformOp:rotateY = 90
+                add xformOp:scale = [10, 0.1, 5]
+            }
+            def Cube "Wall4"
+            {
+                add xformOp:translate = [0, 5, 0]
+                add xformOp:scale = [10, 0.1, 5]
+            }
+        }
+
+        def Xform "Obstacles"
+        {
+            def Cylinder "Cylinder1"
+            {
+                add xformOp:translate = [2, 2, 1]
+                add xformOp:scale = [0.5, 0.5, 1]
+            }
+            def Sphere "Sphere1"
+            {
+                add xformOp:translate = [-2, -2, 1]
+                add xformOp:scale = [0.8, 0.8, 0.8]
+            }
+        }
+    }
+
+    def Xform "Sensors"
+    {
+        def Camera "rgb_camera"
+        {
+            add xformOp:translate = [0.2, 0, 0.5]
+            add xformOp:rotateXYZ = [0, 0, 0]
+            add primvars:isFisheye.value = False
+            add primvars:horizontalAperture.value = 20.955
+            add primvars:verticalAperture.value = 15.2908
+            add primvars:focalLength.value = 18.1
+        }
+
+        def Camera "depth_camera"
+        {
+            add xformOp:translate = [0.2, 0, 0.5]
+            add xformOp:rotateXYZ = [0, 0, 0]
+        }
+
+        def Xform "lidar"
+        {
+            add xformOp:translate = [0, 0, 0.8]
+            add xformOp:rotateXYZ = [0, 0, 0]
+        }
+    }
+
+    def Xform "Lighting"
+    {
+        def DistantLight "KeyLight"
+        {
+            add xformOp:rotateXYZ = [-60, 45, 0]
+            add inputs:intensity.value = 3000
+        }
+
+        def DomeLight "DomeLight"
+        {
+            add inputs:color.value = (0.2, 0.2, 0.2)
+            add inputs:intensity.value = 0.8
+        }
+    }
+}
