@@ -1,0 +1,26 @@
+# LIDAR Sensor Configuration for Digital Twin Examples
+sensor_type: "lidar"
+sensor_name: "2d_lidar"
+topic_name: "/scan"
+update_rate: 10.0  # Hz
+
+ray:
+  scan:
+    horizontal:
+      samples: 360
+      resolution: 1.0
+      min_angle: -3.14159  # -π radians (-180 degrees)
+      max_angle: 3.14159   # π radians (180 degrees)
+  range:
+    min: 0.1
+    max: 10.0
+    resolution: 0.01
+
+noise:
+  type: "gaussian"
+  mean: 0.0
+  stddev: 0.01
+
+# Mounting position on robot
+position: [0.15, 0.0, 0.6]  # x, y, z relative to robot base
+rotation: [0.0, 0.0, 0.0]  # roll, pitch, yaw
