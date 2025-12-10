@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<robot name="simple_humanoid">
+
+  <!-- Base Link -->
+  <link name="base_link"/>
+
+  <!-- Torso -->
+  <joint name="base_to_torso" type="fixed">
+    <parent link="base_link"/>
+    <child link="torso"/>
+    <origin xyz="0 0 0.5"/>
+  </joint>
+  <link name="torso">
+    <visual>
+      <geometry>
+        <box size="0.4 0.3 0.6"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0.2 0.2 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Head -->
+  <joint name="torso_to_head" type="fixed">
+    <parent link="torso"/>
+    <child link="head"/>
+    <origin xyz="0 0 0.4"/>
+  </joint>
+  <link name="head">
+    <visual>
+      <geometry>
+        <sphere radius="0.15"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1.0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <!-- Right Arm -->
+  <joint name="torso_to_upper_arm" type="revolute">
+    <parent link="torso"/>
+    <child link="upper_arm"/>
+    <origin xyz="0 -0.25 0.2"/>
+    <axis xyz="0 1 0"/>
+    <limit lower="-1.57" upper="1.57" effort="1000" velocity="1.0"/>
+  </joint>
+  <link name="upper_arm">
+    <visual>
+      <geometry>
+        <cylinder length="0.4" radius="0.05"/>
+      </geometry>
+      <origin xyz="0 0 -0.2"/>
+      <material name="red">
+        <color rgba="1.0 0.2 0.2 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>
