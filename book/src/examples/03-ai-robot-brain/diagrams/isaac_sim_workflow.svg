@@ -1,0 +1,58 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .node { fill: #e1f5fe; stroke: #0277bd; stroke-width: 2px; rx: 10px; ry: 10px; }
+    .text { font-family: Arial, sans-serif; font-size: 14px; fill: #000; }
+    .arrow { stroke: #444; stroke-width: 2px; marker-end: url(#arrowhead); }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#444" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold">Isaac Sim Workflow</text>
+
+  <!-- Nodes -->
+  <rect x="50" y="80" width="150" height="60" class="node"/>
+  <text x="125" y="110" text-anchor="middle" class="text">Launch Isaac Sim</text>
+
+  <rect x="250" y="80" width="150" height="60" class="node"/>
+  <text x="325" y="110" text-anchor="middle" class="text">Create/Import Robot</text>
+
+  <rect x="450" y="80" width="150" height="60" class="node"/>
+  <text x="525" y="110" text-anchor="middle" class="text">Design Environment</text>
+
+  <rect x="150" y="200" width="150" height="60" class="node"/>
+  <text x="225" y="230" text-anchor="middle" class="text">Configure Physics</text>
+
+  <rect x="350" y="200" width="150" height="60" class="node"/>
+  <text x="425" y="230" text-anchor="middle" class="text">Setup Sensors</text>
+
+  <rect x="250" y="320" width="150" height="60" class="node"/>
+  <text x="325" y="350" text-anchor="middle" class="text">Run Simulation</text>
+
+  <rect x="100" y="440" width="150" height="60" class="node"/>
+  <text x="175" y="470" text-anchor="middle" class="text">Generate Data</text>
+
+  <rect x="400" y="440" width="150" height="60" class="node"/>
+  <text x="475" y="470" text-anchor="middle" class="text">Export Dataset</text>
+
+  <!-- Arrows -->
+  <line x1="200" y1="110" x2="250" y2="110" class="arrow"/>
+  <line x1="400" y1="110" x2="450" y2="110" class="arrow"/>
+  <line x1="325" y1="140" x2="225" y2="200" class="arrow"/>
+  <line x1="375" y1="140" x2="425" y2="200" class="arrow"/>
+  <line x1="225" y1="260" x2="325" y2="320" class="arrow"/>
+  <line x1="425" y1="260" x2="350" y2="320" class="arrow"/>
+  <line x1="325" y1="380" x2="175" y2="440" class="arrow"/>
+  <line x1="325" y1="380" x2="475" y2="440" class="arrow"/>
+
+  <!-- Legend -->
+  <rect x="600" y="500" width="180" height="80" fill="none" stroke="#ccc"/>
+  <text x="690" y="520" text-anchor="middle" font-weight="bold">Legend</text>
+  <rect x="610" y="535" width="20" height="15" fill="#e1f5fe" stroke="#0277bd"/>
+  <text x="640" y="547" class="text">Isaac Sim Step</text>
+</svg>
