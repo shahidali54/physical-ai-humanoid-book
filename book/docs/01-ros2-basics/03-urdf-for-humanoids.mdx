@@ -1,0 +1,70 @@
+---
+sidebar_position: 3
+title: 'URDF for Humanoids'
+---
+
+import CodeBlock from '@theme/CodeBlock';
+import SimpleUrdf from '!!raw-loader!@site/src/examples/01-ros2-basics/ros2_basics/simple_humanoid.urdf';
+import ControlAgent from '!!raw-loader!@site/src/examples/01-ros2-basics/ros2_basics/humanoid_control_agent.py';
+
+# URDF for Humanoids
+
+You've learned how ROS 2 nodes communicate. Now, let's give them something to communicate *about*: a robot.
+
+In ROS, a robot's physical structure is described using the **Unified Robot Description Format (URDF)**. A URDF file is an XML file that defines the robot's **links** (the rigid parts) and **joints** (which connect the links).
+
+## A Simple Humanoid URDF
+
+For this module, we've created a very simple humanoid model with a torso, a head, and a single arm that can move.
+
+Here is the full URDF file:
+
+<CodeBlock language="xml" title="ros2_basics/simple_humanoid.urdf">{SimpleUrdf}</CodeBlock>
+
+### Key URDF Concepts
+
+-   `<robot name="...">`: The root element of the file.
+-   `<link name="...">`: A rigid part of the robot. We define its shape and appearance inside the `<visual>` tag.
+-   `<joint name="..." type="...">`: Connects two links.
+    -   `type="fixed"`: A joint that doesn't move.
+    -   `type="revolute"`: A joint that rotates around an axis.
+    -   `<parent link="..." />` and `<child link="..." />`: Defines the relationship between the two links.
+    -   `<origin xyz="..." />`: The position and orientation of the child link relative to the parent.
+    -   `<axis xyz="..." />`: For revolute joints, this is the axis of rotation.
+    -   `<limit ... />`: Defines the joint's range of motion.
+
+## Visualizing and Controlling the Robot
+
+Now for the exciting part! We'll bring our robot to life in a 3D visualizer and control it with a Python agent.
+
+### 1. The Control Agent
+
+First, we need a node that publishes the joint angles for our robot. This is our `humanoid_control_agent.py`. It publishes `JointState` messages, which tell the robot what angle each joint should be at. This agent makes the arm "wave" by publishing a sine wave pattern of angles.
+
+<CodeBlock language="python" title="ros2_basics/humanoid_control_agent.py">{ControlAgent}</CodeBlock>
+
+### 2. Launching the Simulation
+
+Running the visualizer and all the necessary nodes can be complicated. ROS 2 has a tool called `ros2 launch` to make this easy. A launch file is a Python script that can start multiple nodes at once.
+
+We need a launch file that does three things:
+1.  Loads our URDF file.
+2.  Starts `robot_state_publisher`, a node that reads the URDF and broadcasts the robot's structure.
+3.  Starts `rviz2`, the 3D visualizer.
+4.  Starts our `humanoid_control_agent`.
+
+You'll need to create a `launch` directory inside your `ros2_basics` package and add a `display.launch.py` file (the full file is provided in the code repository).
+
+### 3. Running the Launch File
+
+1.  Make sure you have built your package (`colcon build`) and sourced your workspace (`source install/setup.bash`).
+2.  Run the launch file:
+    ```bash
+    ros2 launch ros2_basics display.launch.py
+    ```
+
+RViz2 will open, and you should see your simple humanoid model waving its arm!
+
+## Congratulations!
+
+You have completed the first module. You've learned the fundamentals of ROS 2, how to create and run Python nodes, and how to describe and control a simulated robot. You are now well on your way to programming much more complex humanoid behaviors.
