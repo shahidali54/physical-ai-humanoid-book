@@ -1,0 +1,71 @@
+---
+title: Gazebo Physics Simulation
+sidebar_position: 1
+---
+
+# Gazebo Physics Simulation
+
+## Introduction to Digital Twins in Gazebo
+
+In robotics, a digital twin is a virtual representation of a physical system that can be used for simulation, testing, and validation before deploying to real hardware. Gazebo provides a powerful physics simulation environment that allows us to create accurate digital twins of our robots.
+
+## Understanding Gazebo Physics
+
+Gazebo uses a physics engine to simulate realistic interactions between objects. The key physics concepts you need to understand are:
+
+### Gravity
+
+Gravity is a fundamental force in physics simulation that affects all objects with mass. In Gazebo, gravity is enabled by default and pulls objects downward at 9.81 m/s² (Earth's gravity).
+
+### Collision Detection
+
+Collision detection is the computational problem of detecting the intersection of two or more objects. Gazebo uses geometric models to detect when objects come into contact with each other.
+
+### Physical Properties
+
+Objects in Gazebo have various physical properties that affect how they interact:
+- Mass: How much matter is in the object
+- Friction: Resistance to sliding motion
+- Bounce: How much energy is retained after collision
+
+## Practical Example: Simple Robot in Gazebo
+
+Let's look at how to set up a simple robot in Gazebo with proper physics properties:
+
+```xml
+<!-- This is a simplified example - full URDF files will be more complex -->
+<robot name="simple_robot">
+  <link name="base_link">
+    <inertial>
+      <mass value="1.0"/>
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <box size="0.5 0.5 0.5"/>
+      </geometry>
+    </collision>
+  </link>
+</robot>
+```
+
+## Running the Simulation
+
+To run a Gazebo simulation with proper physics:
+1. Launch Gazebo with your world file
+2. Load your robot model
+3. Observe how gravity affects the robot's movement
+4. Watch collision detection when the robot interacts with obstacles
+
+## Gazebo Physics Diagram
+
+![Gazebo Physics Concepts](/img/gazebo_physics_concept.svg)
+
+## Summary
+
+Understanding Gazebo physics is fundamental to creating effective digital twins. Properly configured physics properties ensure that your simulation accurately reflects how the robot would behave in the real world.
