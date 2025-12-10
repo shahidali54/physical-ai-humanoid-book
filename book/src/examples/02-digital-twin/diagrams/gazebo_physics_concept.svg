@@ -1,0 +1,66 @@
+<svg width="800" height="500" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .title { font: bold 24px sans-serif; fill: #2c3e50; }
+    .subtitle { font: 18px sans-serif; fill: #34495e; }
+    .box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+    .robot { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+    .obstacle { fill: #2ecc71; stroke: #27ae60; stroke-width: 2; }
+    .arrow { stroke: #e74c3c; stroke-width: 3; marker-end: url(#arrowhead); }
+    .label { font: 16px sans-serif; fill: #2c3e50; }
+  </style>
+
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7"
+      refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#e74c3c" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" class="title">Gazebo Physics Simulation Concepts</text>
+
+  <!-- Gazebo World Container -->
+  <rect x="50" y="80" width="700" height="380" rx="10" ry="10" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="3"/>
+  <text x="400" y="100" text-anchor="middle" class="subtitle">Gazebo Simulation Environment</text>
+
+  <!-- Gravity Arrow -->
+  <line x1="200" y1="150" x2="200" y2="250" class="arrow"/>
+  <text x="210" y="200" class="label">Gravity (9.81 m/s²)</text>
+
+  <!-- Robot -->
+  <g transform="translate(180, 200)">
+    <rect x="0" y="0" width="40" height="60" class="robot" rx="5" ry="5"/>
+    <rect x="10" y="-20" width="20" height="20" class="robot" rx="10" ry="10"/>
+    <rect x="-10" y="10" width="60" height="15" class="robot" rx="5" ry="5"/>
+    <text x="20" y="80" text-anchor="middle" class="label">Robot with Mass</text>
+  </g>
+
+  <!-- Obstacle -->
+  <rect x="400" y="250" width="80" height="80" class="obstacle" rx="5" ry="5"/>
+  <text x="440" y="350" text-anchor="middle" class="label">Obstacle</text>
+
+  <!-- Physics Properties Box -->
+  <rect x="550" y="120" width="180" height="120" class="box" rx="5" ry="5"/>
+  <text x="640" y="140" text-anchor="middle" class="label" font-weight="bold">Physics Properties</text>
+  <text x="560" y="165" class="label">• Mass: 1.0 kg</text>
+  <text x="560" y="185" class="label">• Friction: 0.5</text>
+  <text x="560" y="205" class="label">• Bounce: 0.1</text>
+  <text x="560" y="225" class="label">• Inertia: tensor</text>
+
+  <!-- Collision Detection -->
+  <path d="M 220 230 Q 300 240 400 290" stroke="#9b59b6" stroke-width="3" fill="none" stroke-dasharray="5,5"/>
+  <text x="300" y="270" text-anchor="middle" class="label" fill="#9b59b6">Collision Detection</text>
+
+  <!-- Force Application -->
+  <line x1="250" y1="230" x2="300" y2="200" class="arrow"/>
+  <text x="310" y="190" class="label">Applied Force</text>
+
+  <!-- Legend -->
+  <rect x="60" y="420" width="680" height="40" fill="#ffffff" stroke="#bdc3c7" stroke-width="1"/>
+  <circle cx="80" cy="440" r="6" class="robot"/>
+  <text x="95" y="445" class="label">Robot</text>
+  <circle cx="180" cy="440" r="6" class="obstacle"/>
+  <text x="195" y="445" class="label">Environment</text>
+  <line x1="290" y1="440" x2="310" y2="440" class="arrow"/>
+  <text x="320" y="445" class="label">Force/Gravity</text>
+</svg>
