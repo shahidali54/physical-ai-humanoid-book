@@ -1,0 +1,48 @@
+# Audio Configuration for VLA Voice-to-Action Pipeline
+
+# Audio input settings
+audio_input:
+  sample_rate: 16000
+  channels: 1
+  bit_depth: 16
+  buffer_size: 1024
+
+# Whisper ASR settings
+whisper:
+  model_size: "base"  # Options: tiny, base, small, medium, large
+  device: "auto"      # Options: cpu, cuda, auto
+  language: "en"      # Language code for recognition
+  temperature: 0.0    # Temperature for sampling (0.0 for deterministic)
+
+# Recording settings
+recording:
+  default_duration: 5.0    # Default recording duration in seconds
+  max_duration: 10.0       # Maximum allowed recording duration
+  silence_threshold: 0.01  # Threshold for detecting silence (normalized)
+  silence_duration: 1.0    # Duration of silence to stop recording
+
+# Processing settings
+processing:
+  confidence_threshold: 0.3  # Minimum confidence for accepting transcription
+  vad_enabled: true          # Voice Activity Detection enabled
+  noise_suppression: true    # Enable noise suppression
+  gain_control: true         # Enable automatic gain control
+
+# Output settings
+output:
+  publish_transcriptions: true    # Whether to publish transcriptions to ROS topic
+  publish_confidence: true        # Whether to publish confidence scores
+  save_recordings: false          # Whether to save recordings to file
+  recording_directory: "./recordings"  # Directory for saving recordings
+
+# Topic names
+topics:
+  audio_input: "/audio_input"
+  voice_commands: "/voice_commands"
+  command_confidence: "/command_confidence"
+  robot_commands: "/cmd_vel"
+
+# Node settings
+node:
+  name: "voice_command_processor"
+  qos_depth: 10
