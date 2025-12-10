@@ -1,0 +1,141 @@
+# Task Decomposition Prompt Templates for VLA Robotics
+
+## Basic Task Decomposition Prompt
+
+```
+Decompose the following high-level task into specific, executable robot actions:
+
+TASK: {task_description}
+
+ENVIRONMENT STATE:
+{environment_state}
+
+ROBOT CAPABILITIES:
+{robot_capabilities}
+
+AVAILABLE ACTION TYPES:
+{available_action_types}
+
+Provide the result as a JSON array of action steps. Each action step should have:
+- action_type: The type of action (must be one of the available action types)
+- parameters: Dictionary of parameters needed for the action
+- description: Human-readable description of the action
+- priority: Priority level (1-5, where 1 is highest priority)
+- estimated_duration: Estimated time to complete the action in seconds
+
+Example format:
+[
+    {{
+        "action_type": "NAVIGATE_TO_LOCATION",
+        "parameters": {{"x": 1.0, "y": 2.0, "theta": 0.0}},
+        "description": "Navigate to the kitchen counter",
+        "priority": 1,
+        "estimated_duration": 5.0
+    }},
+    {{
+        "action_type": "DETECT_OBJECT",
+        "parameters": {{"target_object": "red cup"}},
+        "description": "Detect the red cup on the counter",
+        "priority": 2,
+        "estimated_duration": 2.0
+    }}
+]
+
+Ensure that:
+1. Actions are logically ordered (consider dependencies)
+2. Parameters are specific and actionable
+3. Actions are compatible with the robot's capabilities
+4. The sequence achieves the overall task goal
+5. Include error handling steps if appropriate
+```
+
+## Multi-Step Planning Prompt
+
+```
+Plan a multi-step task to achieve the following goal:
+
+GOAL: {goal}
+
+CONSTRAINTS:
+{constraints}
+
+Provide a detailed plan as a JSON object with the following structure:
+{{
+    "plan_overview": "Brief overview of the plan",
+    "steps": [
+        {{
+            "id": "unique_step_id",
+            "name": "Step name",
+            "description": "Detailed description of what to do",
+            "required_resources": ["list of resources needed"],
+            "estimated_time": 10.0,
+            "dependencies": ["list of step IDs this step depends on"],
+            "subtasks": [
+                {{
+                    "name": "Subtask name",
+                    "description": "What to do",
+                    "completion_criteria": "How to know it's done"
+                }}
+            ],
+            "risk_assessment": "Potential risks and mitigation strategies",
+            "success_indicators": ["list of success indicators"]
+        }}
+    ],
+    "resource_requirements": ["summary of all resources needed"],
+    "estimated_total_time": 120.0,
+    "critical_dependencies": ["list of critical dependency chains"]
+}}
+
+The plan should be:
+- Comprehensive and actionable
+- Consider the specified constraints
+- Include risk assessment and mitigation strategies
+- Have clear success criteria for each step
+```
+
+## Plan Refinement Prompt
+
+```
+Refine the following plan based on the provided feedback:
+
+CURRENT PLAN:
+{current_plan_json}
+
+FEEDBACK:
+{feedback}
+
+Provide the refined plan in the same JSON format as the original plan.
+Only make changes that address the feedback.
+If the feedback indicates no changes are needed, return the original plan unchanged.
+```
+
+## Cognitive Planning System Message
+
+```
+You are an expert in robotics and AI planning.
+Decompose high-level tasks into specific, executable robot actions.
+Ensure the action sequence is logical and achievable with the given robot capabilities.
+Consider environmental constraints and potential obstacles.
+Provide actionable steps with specific parameters.
+Include error handling and recovery strategies when appropriate.
+```
+
+## Task Context Integration Prompt
+
+```
+Given the following context, decompose the task:
+
+USER GOAL: {user_goal}
+ENVIRONMENT CONTEXT: {environment_context}
+ROBOT STATUS: {robot_status}
+AVAILABLE RESOURCES: {resources}
+PREVIOUS ACTIONS: {previous_actions}
+
+Create a plan that:
+1. Takes into account the current context
+2. Builds upon previous actions if relevant
+3. Uses available resources efficiently
+4. Achieves the user goal safely
+
+Return the plan in the standard JSON format.
+```
